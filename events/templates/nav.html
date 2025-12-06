@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Management</title>
+  {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
+   <link rel="stylesheet" href="{% static "css/output.css" %}">
+</head>
+<body class="bg-gray-100 min-h-screen">
+  {% comment %} Navbar {% endcomment %}
+  <nav class="backdrop-blur-lg bg-white/70 shadow-lg px-8 py-4 flex items-center justify-between rounded-b-2xl border-b border-gray-200">
+    <div class="flex items-center space-x-3">
+      <span class="text-2xl font-bold text-blue-600">Plan<span class="text-purple-600">It</span></span>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="px-4 py-2 rounded-xl bg-violet-500 text-white shadow-md hover:shadow-lg hover:opacity-90 transition"><a href="{% url 'home' %}">Home</a></button>
+      <button class="px-4 py-2 rounded-xl bg-emerald-500 text-white shadow-md hover:shadow-lg hover:opacity-90 transition"><a href="{% url 'dashboard' %}">Dashboard</a></button>
+      <button class="px-4 py-2 rounded-xl bg-amber-500 text-white shadow-md hover:shadow-lg hover:opacity-90 transition"><a href="{% url 'form' %}">Add Event</a></button>
+    </div>
+  </nav>
+{% block home %}
+
+{% endblock home %}
+
+{% block dashboard %}
+
+{% endblock dashboard %}
+
+{% block form %}
+
+{% endblock form %}
+
+{% block participants_form %}
+
+{% endblock participants_form %}
+

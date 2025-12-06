@@ -1,0 +1,36 @@
+ {% extends "nav.html" %}
+ {% block home %}
+
+  <section class="text-center mt-10 bg-gradient-to-r from-blue-500 to-purple-500 text-white py-12 rounded-xl mx-8 shadow-lg">
+    <h1 class="text-4xl font-bold">Event Management</h1>
+  </section>
+
+  <section class="flex justify-center mt-10">
+    <form name="" method="GET" class="bg-white shadow-lg p-6 rounded-xl flex space-x-3 w-1/2 justify-center">
+      <select name="category" class="px-3 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-purple-400">
+        <option value="">All Categories</option>
+        {% for cat in categories %}
+            <option value="{{ cat.id }}" 
+                {% if selected_category == cat.id|stringformat:"s" %}selected{% endif %}>
+                {{ cat.get_category_display }}
+            </option>
+        {% endfor %}
+      </select>
+      <input type="text" placeholder="Search events..." name="value_from_user" value="{{query | default:""}}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Search</button>
+      </form>
+  </section>
+
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
+    {% for event in events %}
+    <div class="bg-white shadow-lg p-5 rounded-xl">
+      <h2 class="text-xl font-semibold">{{event.name}}</h2>
+      <p class="text-gray-600 mt-2 font-semibold">Date: {{event.date}}</p>
+      <p class="text-gray-600 mt-2 font-semibold">Location: {{event.location}}</p>
+      <a href="{% url "event-detail" event.id %}"><button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">View</button></a>
+    </div>
+    {% endfor %}
+  </section>
+</body>
+</html>
+{% endblock home %}

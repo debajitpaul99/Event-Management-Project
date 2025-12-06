@@ -1,0 +1,89 @@
+{% extends "nav.html" %}
+{% block dashboard %}
+{% comment %} Header {% endcomment %}
+<header class="text-center mb-10 mt-10">
+   <h1 class="text-4xl font-bold text-indigo-600">Organizer Dashboard</h1>
+</header>
+{% comment %} Stats Grid {% endcomment %}
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10" id="statsGrid">
+   <a href="{% url "dashboard" %}?type=all_participants">
+   <div  class="cursor-pointer bg-white p-6 rounded-xl shadow hover:shadow-xl text-center transition">
+      <h2 class="text-3xl font-bold text-blue-600" id="totalParticipants">{{total_participants}}</h2>
+      <p class="text-gray-700 mt-2">Total Participants</p>
+   </div>
+   </a>
+   <a href="{% url "dashboard" %}?type=all_events">
+   <div  class="cursor-pointer bg-white p-6 rounded-xl shadow hover:shadow-xl text-center transition">
+      <h2 class="text-3xl font-bold text-purple-600" id="totalEvents">{{total_events}}</h2>
+      <p class="text-gray-700 mt-2">Total Events</p>
+   </div>
+   </a>
+   <a href="{% url "dashboard" %}?type=upcoming_events">
+   <div  class="cursor-pointer bg-white p-6 rounded-xl shadow hover:shadow-xl text-center transition">
+      <h2 class="text-3xl font-bold text-green-600" id="upcomingEvents">{{upcoming_events}}</h2>
+      <p class="text-gray-700 mt-2">Upcoming Events</p>
+   </div>
+   </a>
+   <a href="{% url "dashboard" %}?type=past_events">
+   <div  class="cursor-pointer bg-white p-6 rounded-xl shadow hover:shadow-xl text-center transition">
+      <h2 class="text-3xl font-bold text-red-600" id="pastEvents">{{past_events}}</h2>
+      <p class="text-gray-700 mt-2">Past Events</p>
+   </div>
+   </a>
+</section>
+<div class="text-center mb-10">
+    <a href="{% url "all-events" %}" 
+       class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-xl shadow hover:bg-indigo-700 transition">
+      View All Events
+    </a>
+</div>
+{% comment %} Dynamic Data Display Box {% endcomment %}
+<section class="bg-white p-8 rounded-2xl shadow-lg mb-10 border border-gray-100" id="dataBox">
+   <div class="flex items-center gap-3 mb-6">
+      <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round"
+            d="M8 7V3m8 4V3m-9 8h10m-12 8h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      </svg>
+      <h2 class="text-3xl font-bold text-indigo-700">{{heading}}</h2>
+   </div>
+  {% comment %} Event list {% endcomment %}
+   {% if all_participants %}
+<ul class="mt-4 space-y-4">
+   {% for p in all_participants %}
+   <li class="p-5 rounded-xl border border-gray-200 shadow-sm 
+      hover:shadow-md hover:border-indigo-300 transition bg-gray-50">
+      <div class="flex justify-between items-center">
+         <h3 class="text-xl font-semibold text-gray-800">{{ p.name }}</h3>
+      </div>
+      <div class="flex justify-between items-center">
+         <h3 class="text-lg text-gray-800">{{ p.email }}</h3>
+      </div>
+   </li>
+   {% endfor %}
+</ul>
+
+{% elif todays_events %}
+<ul class="mt-4 space-y-4">
+   {% for event in todays_events %}
+   <li class="p-5 rounded-xl border border-gray-200 shadow-sm bg-gray-50">
+      <div class="flex justify-between items-center">
+         <h3 class="text-xl font-semibold text-gray-800">{{ event.name }}</h3>
+      </div>
+      <div class="mt-3 flex flex-col gap-1 text-gray-600">
+         <p class="flex items-center gap-2">{{ event.time }}</p>
+         <p class="flex items-center gap-2">{{ event.date }}</p>
+         <p class="flex items-center gap-2">{{ event.location }}</p>
+      </div>
+   </li>
+   {% endfor %}
+</ul>
+
+{% else %}
+<p class="text-gray-500 text-center mt-6 italic">No events to show!</p>
+{% endif %}
+
+</section>
+</body>
+</html>
+{% endblock dashboard %}
