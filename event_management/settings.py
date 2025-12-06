@@ -78,24 +78,24 @@ INTERNAL_IPS = [
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'event_management',
-#         'USER': 'postgres',
-#         'PASSWORD': '12345',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://event_management_db_baet_user:dXMxjJUmp0Lc3S4XHJJtLEqQPT4PZJyZ@dpg-d4q74d2dbo4c73bndlb0-a.virginia-postgres.render.com/event_management_db_baet',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'event_management',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgresql://event_management_db_baet_user:dXMxjJUmp0Lc3S4XHJJtLEqQPT4PZJyZ@dpg-d4q74d2dbo4c73bndlb0-a.virginia-postgres.render.com/event_management_db_baet',
+#         conn_max_age=600
+#     )
+# }
 
 
 # Password validation
